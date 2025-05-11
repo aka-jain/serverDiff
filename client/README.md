@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Getting Started with Client side integration of Server side virtual DOM renderer
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

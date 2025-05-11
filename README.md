@@ -37,8 +37,8 @@ A real-time collaborative virtual DOM editor that uses WebSocket for live update
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clonehttps://github.com/aka-jain/serverDiff
+cd serverDiff
 ```
 
 2. Install server dependencies:
