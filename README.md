@@ -1,46 +1,110 @@
-# Getting Started with Create React App
+# Server-side DOM Renderer with Diff and Reconciliation
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time collaborative virtual DOM editor that uses WebSocket for live updates. This project demonstrates how to implement a simple virtual DOM system with real-time synchronization between server and client, featuring server-side rendering with diff and reconciliation capabilities.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Server-side DOM rendering with WebSocket
+- Virtual DOM diff and reconciliation
+- Real-time DOM updates
+- Live text content updates
+- Dynamic element addition
+- Type-safe implementation with TypeScript
 
-### `npm start`
+## Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+.
+├── client/                 # React client application
+│   ├── src/
+│   │   ├── utils/         # Utility functions and constants
+│   │   │   ├── constants.ts  # Application constants
+│   │   │   └── endpoints.ts  # API endpoints
+│   │   ├── App.tsx        # Main application component
+│   │   └── App.css        # Application styles
+│   └── package.json       # Client dependencies
+└── server/                # WebSocket server
+    ├── server.js          # Server implementation with virtual DOM
+    └── package.json       # Server dependencies
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+- Node.js (v14 or higher)
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Setup
 
-### `npm run build`
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <repository-name>
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install server dependencies:
+```bash
+cd server
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install client dependencies:
+```bash
+cd ../client
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the Application
 
-### `npm run eject`
+1. Start the WebSocket server:
+```bash
+cd server
+node server.js
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. In a new terminal, start the React client:
+```bash
+cd client
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application will be available at `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Usage
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **Update Title**: Changes the main title with current timestamp
+- **Update Subtitle**: Changes the subtitle with current timestamp
+- **Add Entry**: Adds a new paragraph to the content section
 
-## Learn More
+## Technical Details
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Frontend**: React with TypeScript
+- **Backend**: Node.js with WebSocket
+- **Virtual DOM**: Server-side implementation with diff and reconciliation
+- **Communication**: WebSocket for real-time updates
+- **State Management**: React's useState for local state
+- **Type Safety**: TypeScript interfaces and type checking
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Development
+
+The project uses TypeScript for type safety. Key interfaces include:
+
+- `VirtualDOMNode`: Structure for virtual DOM nodes
+- `WebSocketMessage`: Types for WebSocket communication
+- `Action`: Types for DOM modification actions
+
+## How It Works
+
+1. **Server-side Virtual DOM**:
+   - Maintains the source of truth for DOM structure
+   - Handles diff and reconciliation
+   - Sends updates to clients
+
+2. **Client-side Rendering**:
+   - Receives virtual DOM updates
+   - Renders changes efficiently
+   - Sends user actions back to server
+
+3. **Real-time Updates**:
+   - WebSocket connection for bi-directional communication
+   - Immediate propagation of changes
+   - Efficient state synchronization
