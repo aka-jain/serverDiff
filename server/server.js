@@ -1,6 +1,10 @@
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8080 });
+// Create WebSocket server
+const wss = new WebSocket.Server({ 
+  port: process.env.PORT || 8080,
+  path: '/ws'
+});
 
 // Initial DOM
 let virtualDOM = {
@@ -32,8 +36,8 @@ function findNodeByKey(vdom, key) {
     }
 
     for (const child of vdom.children || []) {
-        const node = findNodeByKey(child, key);
-        if (node) return node;
+        const found = findNodeByKey(child, key);
+        if (found) return found;
     }
 
     return null;
@@ -60,6 +64,13 @@ function applyAction(action, vdom) {
                 });
             }
             break;
+
+        case 'REMOVE_CHILD':
+            const parent = findNodeByKey(newVdom, action.parentKey);
+            if (parent) {
+                parent.children = parent.children.filter(child => child.props.key !== action.key);
+            }
+            break;
     }
 
     return newVdom;
@@ -84,3 +95,6 @@ wss.on('connection', (ws) => {
         console.log('Client disconnected');
     });
 });
+
+// Export for Vercel
+module.exports = wss;
